@@ -17,7 +17,7 @@ It is easy to use:
 
 -Create a file "config.xml" (named it as you want) like this: 
 <?xml version="1.0" encoding="UTF-8"?>
-<config>
+\<config\>
   <login>LOGIN</login>
 	<password>PASSWORD</password>
 	<URL>https://stream.twitter.com/1/statuses/sample.json</URL>	
