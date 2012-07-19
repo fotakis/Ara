@@ -78,8 +78,8 @@ public class Collector extends Thread {
 			// in the future, think about MultiAuth to allow several accounts
 			httpclient.getCredentialsProvider().setCredentials(
 					AuthScope.ANY,
-					new UsernamePasswordCredentials(data.get("login"), data
-							.get("password")));
+					new UsernamePasswordCredentials(
+							data.get("login"), data.get("password")));
 
 			HttpGet httpget = new HttpGet(data.get("URL"));
 
@@ -89,17 +89,17 @@ public class Collector extends Thread {
 			if (entity != null) {
 
 				InputStream instream = entity.getContent();
-				String t;
+				String content;
 				BufferedReader br = new BufferedReader(new InputStreamReader(
 						instream));
 
 				// we read as long as we do not ask to stop
 				while (!stop) {
 
-					t = br.readLine();
-					if (t != null) {
+					content = br.readLine();
+					if (content != null) {
 
-						System.out.println(t);
+						System.out.println(content);
 						
 					} // if
 
