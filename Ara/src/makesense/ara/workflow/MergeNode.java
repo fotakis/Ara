@@ -16,6 +16,12 @@
  */
 package makesense.ara.workflow;
 
+/**
+ * The MergeNode class corresponds to the UML Activity diagram Merge node, that is
+ * several concurrent threads follow the same flow but are still separated
+ * @author mphuget
+ * @since 1.0
+ */
 public class MergeNode extends ControlNode {
 
-}
+} //MergeNode class

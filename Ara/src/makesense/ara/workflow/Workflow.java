@@ -56,6 +56,34 @@ public class Workflow extends Thread {
 				
 				else if (current instanceof ForkNode) {
 					
+					//retrieve the list of outgoing edges for this fork node
+					Vector<Edge> edges = ((ForkNode)current).getEdges();
+					
+					//for every edge, create a new Workflow and run it as a Thread
+					for (Edge edge : edges) {
+						
+						Node nextNode = edge.getEndNode();
+						
+						//we are obliged to create an initial node 
+						InitialNode initialNode = new InitialNode();
+						
+						//and an edge from this initial node to the next node
+						Edge fromInitial = new Edge(nextNode);
+						initialNode.setEdge(fromInitial);
+						
+						//then we create the workflow
+						Workflow wfw = new Workflow(initialNode);
+						
+						//and execute it
+						wfw.start();						
+						
+					} //for
+					
+					//we need to stop the current workflow to only consider
+					//new workflows coming from the fork
+					current = new FinalNode();
+					
+					
 				} //if
 				
 				else if (current instanceof JoinNode) {
@@ -66,9 +94,8 @@ public class Workflow extends Thread {
 					
 				} //if
 				
-				else if (current instanceof MergeNode) {
-					
-				} //if
+				//MergeNode condition is deleted since there is nothing special to do
+				//for this node
 				
 			} // if
 
@@ -82,8 +109,14 @@ public class Workflow extends Thread {
 				
 			} // else
 
-			Edge edge = current.getEdge();
-			current = edge.getEndNode();
+			if (current instanceof Task || 
+				current instanceof InitialNode ||
+				current instanceof MergeNode) {
+				
+				Edge edge = current.getEdge();
+				current = edge.getEndNode();
+				
+			} //if
 
 		} // while
 
