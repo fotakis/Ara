@@ -134,13 +134,13 @@ public class Ara extends Thread {
 	 */
 	private void usage() {
 
-		System.out.println("Ara toolkit");
-		System.out.println("available on GitHub https://github.com/mphuget/Ara");
-		System.out.println("Provides tasks to retrieve and does real-time analysis");
-		System.out.println("on continuous streaming");
-		System.out.println("Marc-Philippe Huget");
-		System.out.println("Please visit the GitHub repository for more information");
-		System.out.println("Supply connection file on the command-line argument");
+		System.err.println("Ara toolkit");
+		System.err.println("available on GitHub https://github.com/mphuget/Ara");
+		System.err.println("Provides tasks to retrieve and does real-time analysis");
+		System.err.println("on continuous streaming");
+		System.err.println("Marc-Philippe Huget");
+		System.err.println("Please visit the GitHub repository for more information");
+		System.err.println("Supply connection file on the command-line argument");
 
 	} // usage()
 
