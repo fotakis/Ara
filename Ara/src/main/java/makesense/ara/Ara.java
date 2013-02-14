@@ -52,10 +52,13 @@ public class Ara extends Thread {
 
 	// store the different information required for connection
 	HashMap<String, String> data = null;
+    private CollectorHandler handler;
+    private Collector collector;
 
-	public Ara(String file) {
+    public Ara(String file, CollectorHandler handler) {
+        this.handler = handler;
 
-		data = new HashMap<String, String>();
+        data = new HashMap<String, String>();
 
 		// populates the data attribute with connection information
 		getConnectionData(file);
@@ -73,10 +76,14 @@ public class Ara extends Thread {
 
 		// one unique task in the run(): creates a Collector to connect to the
 		// streaming
-		new Collector(data).start();
+        collector = new Collector(handler, data);
+        collector.start();
 
 	} // run()
 
+    public void disconnect(){
+        collector.disconnect();
+    }
 	/**
 	 * getConnectionData() retrieves connection information
 	 */
@@ -158,7 +165,7 @@ public class Ara extends Thread {
 		if (args.length == 1) {
 
 			// create an instance of Ara as a Thread and execute it
-			new Ara(args[0]).start();
+			new Ara(args[0],new SoutCollectorHandler()).start();
 
 		} // if
 

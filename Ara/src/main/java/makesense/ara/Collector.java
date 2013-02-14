@@ -50,11 +50,13 @@ public class Collector extends Thread {
 
 	// for stopping the streaming
 	private boolean stop = false;
+    private final CollectorHandler handler;
 
-	public Collector(HashMap<String, String> data) {
+    public Collector(CollectorHandler handler, HashMap<String, String> data) {
 
 		//store the connection information
 		this.data = data;
+        this.handler = handler;
 
 	} // constructor
 
@@ -98,8 +100,7 @@ public class Collector extends Thread {
 
 					content = br.readLine();
 					if (content != null) {
-
-						System.out.println(content);
+						this.handler.handle(content);
 						
 					} // if
 
@@ -123,4 +124,8 @@ public class Collector extends Thread {
 		
 	} // connect()
 
+
+    public void disconnect(){
+        this.stop = true;
+    }
 } // Collector class
